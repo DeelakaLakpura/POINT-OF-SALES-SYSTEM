@@ -1,7 +1,5 @@
 # Point of Sale (POS) System - C# .NET Desktop Application
 
-![POS System](pos-system.png)
-
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -70,9 +68,7 @@ git clone https://github.com//DeelakaLakpura/POINT-OF-SALES-SYSTEM/
 
 2. Open the project in your preferred C# .NET IDE.
 
-3. Configure the database connection settings in the `appsettings.json` file.
-
-4. Build and run the application.
+3. Build and run the application.
 
 ## Usage
 
@@ -84,16 +80,16 @@ git clone https://github.com//DeelakaLakpura/POINT-OF-SALES-SYSTEM/
 
 ## Screenshots
 
-![Screenshot 1](SS/ss01.png)
-![Screenshot 1](SS/ss02.png)
-![Screenshot 1](SS/SS03.png)
-![Screenshot 1](SS/SS04.png)
-![Screenshot 1](SS/SS05.png)
-![Screenshot 1](SS/SS06.png)
-![Screenshot 1](SS/SS07.png)
-![Screenshot 1](SS/SS08.png)
-![Screenshot 1](SS/SS09.png)
-![Screenshot 1](SS/SS10.png)
+![Screenshot 1](SS/ss01.PNG)
+![Screenshot 1](SS/ss02.PNG)
+![Screenshot 1](SS/SS03.PNG)
+![Screenshot 1](SS/SS04.PNG)
+![Screenshot 1](SS/SS05.PNG)
+![Screenshot 1](SS/SS06.PNG)
+![Screenshot 1](SS/SS07.PNG)
+![Screenshot 1](SS/SS08.PNG)
+![Screenshot 1](SS/SS09.PNG)
+![Screenshot 1](SS/SS10.PNG)
 
 
 ## License
