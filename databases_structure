@@ -1,0 +1,172 @@
+--create database POS_DB
+-----process1
+--CREATE TABLE TblProduct1 (
+--    pcode VARCHAR(50) PRIMARY KEY,
+--    barcode VARCHAR(50),
+--    pdesc VARCHAR(255),
+--    bid INT,
+--    cid INT,
+--    price DECIMAL(18, 2),
+--    qty INT,
+--    reorder INT
+--);
+----BrandTbl
+
+--CREATE TABLE BrandTbl (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    brand VARCHAR(255)
+--);
+
+----TblCatecory
+--CREATE TABLE TblCatecory (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    category VARCHAR(255)
+--);
+----tblCart1
+
+--CREATE TABLE tblCart1 (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    transno VARCHAR(50),
+--    pcode VARCHAR(50),
+--    price DECIMAL(18, 2),
+--    qty INT,
+--    disc DECIMAL(18, 2),
+--    disc_precent DECIMAL(5, 2),
+--    total DECIMAL(18, 2),
+--    sdate DATE,
+--    cashier VARCHAR(50),
+--    status VARCHAR(50),
+--    FOREIGN KEY (pcode) REFERENCES TblProduct1(pcode)
+--);
+----tblAdjustment
+--CREATE TABLE tblAdjustment (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    referenceno VARCHAR(50),
+--    pcode VARCHAR(50),
+--    qty INT,
+--    action VARCHAR(50),
+--    remarks VARCHAR(255),
+--    sdate DATE,
+--    [user] VARCHAR(50),
+--    FOREIGN KEY (pcode) REFERENCES TblProduct1(pcode)
+--);
+
+----tblStore
+--CREATE TABLE tblStore (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    store VARCHAR(255),
+--    address VARCHAR(255),
+--    phone VARCHAR(50)
+--);
+----tblUser
+--CREATE TABLE tblUser (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    username VARCHAR(50),
+--    password VARCHAR(50),
+--    role VARCHAR(50),
+--    name VARCHAR(255),
+--    isactive BIT
+--);
+
+----tblVendor
+--CREATE TABLE tblVendor (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    vender VARCHAR(255),
+--    address VARCHAR(255),
+--    contactperson VARCHAR(255),
+--    telephone VARCHAR(50),
+--    email VARCHAR(255),
+--    fax VARCHAR(50)
+--);
+----tblStockin
+--CREATE TABLE tblStockin (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    refno VARCHAR(50),
+--    pcode VARCHAR(50),
+--    qty int,
+--    sdate DATE,
+--    stockinby VARCHAR(50),
+--    vendorid INT,
+--    status VARCHAR(50),
+--    FOREIGN KEY (pcode) REFERENCES TblProduct1(pcode),
+--    FOREIGN KEY (vendorid) REFERENCES tblVendor(id)
+--);
+
+----tblCancel
+
+--CREATE TABLE tblCancel (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    transno VARCHAR(50),
+--    pcode VARCHAR(50),
+--    price DECIMAL(18, 2),
+--    qty INT,
+--    sdate DATE,
+--    voidby VARCHAR(50),
+--    cancelledby VARCHAR(50),
+--    reason VARCHAR(255),
+--    action VARCHAR(255),
+--    FOREIGN KEY (pcode) REFERENCES TblProduct1(pcode)
+--);
+
+--CREATE TABLE tblVat (
+--    id INT PRIMARY KEY IDENTITY(1,1),
+--    vat DECIMAL(5, 2) NOT NULL
+--);
+-----process2
+--CREATE VIEW vwCriticalItems AS
+--SELECT pdesc 
+--FROM TblProduct1 
+--WHERE reorder > qty;
+
+
+--CREATE VIEW vwStockin AS
+--SELECT 
+--    s.id,
+--    s.refno,
+--    s.pcode,
+--    p.pdesc,
+--    s.qty,
+--    s.sdate,
+--    s.stockinby,
+--    v.vender,
+--    s.status
+--FROM 
+--    tblStockin s
+--INNER JOIN 
+--    TblProduct1 p ON s.pcode = p.pcode
+--INNER JOIN 
+--    tblVendor v ON s.vendorid = v.id;
+
+--CREATE VIEW vwCancelledOrder AS
+--SELECT 
+--    c.id,
+--    c.transno,
+--    c.pcode,
+--    p.pdesc AS ProductDescription,
+--    c.price,
+--    c.qty,
+--    c.sdate,
+--    c.voidby,
+--    c.cancelledby,
+--    c.reason,
+--    c.action
+--FROM 
+--    tblCancel c
+--INNER JOIN 
+--    TblProduct1 p ON c.pcode = p.pcode;
+
+
+--CREATE VIEW vwSoldItems AS
+--SELECT 
+--    c.pcode,
+--    p.pdesc,
+--    c.qty,
+--    c.total,
+--    c.sdate,
+--    c.status
+--FROM 
+--    tblCart1 c
+--INNER JOIN 
+--    TblProduct1 p ON c.pcode = p.pcode
+--WHERE 
+--    c.status = 'Sold';
